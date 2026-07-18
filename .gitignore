@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Docs site build output
+dist/
+.output/
+.vitepress/cache/
+.astro/
+
+# Native build artifacts
+.build/
+DerivedData/
+build/
+.gradle/
+*.xcuserstate
+xcuserdata/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
