@@ -1,4 +1,5 @@
-package io.github.zumkorn.hotwirebridge
+// Replace with your app's package.
+package com.example.bridge
 
 import android.view.Menu
 import android.view.MenuItem
