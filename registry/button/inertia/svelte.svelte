@@ -10,11 +10,18 @@
   const dispatch = createEventDispatcher()
   const { supported, send } = useBridgeComponent('button')
 
+  // Held in a `const` object so reading the id below does not make this
+  // reactive block depend on itself.
+  const registration = { id: null }
+
   // `supported` is a store; it flips when the native handshake completes. Register
   // on support and re-register when title/side change. Native replies to
   // "connect" on every tap.
   $: if ($supported) {
-    send('connect', { title, side }, () => dispatch('tap'))
+    // Drop the old callback before re-registering, so a title/side change does
+    // not leave a second one behind and report every tap twice.
+    window.HotwireNative?.web?.removeCallback(registration.id)
+    registration.id = send('connect', { title, side }, () => dispatch('tap'))
   }
 </script>
 

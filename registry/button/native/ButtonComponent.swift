@@ -1,3 +1,4 @@
+import Foundation
 import HotwireNative
 import UIKit
 
@@ -7,15 +8,23 @@ import UIKit
 ///
 /// Register once with `Hotwire.registerBridgeComponents([ButtonComponent.self])`.
 final class ButtonComponent: BridgeComponent {
-    override class var name: String { "button" }
+    override nonisolated class var name: String { "button" }
 
     override func onReceive(message: Message) {
-        guard message.event == "connect" else { return }
-        handleConnectEvent(message: message)
+        guard let event = Event(rawValue: message.event) else {
+            return
+        }
+
+        switch event {
+        case .connect:
+            handleConnectEvent(message: message)
+        }
     }
 
+    // MARK: Private
+
     private var viewController: UIViewController? {
-        delegate.destination as? UIViewController
+        delegate?.destination as? UIViewController
     }
 
     private func handleConnectEvent(message: Message) {
@@ -23,7 +32,7 @@ final class ButtonComponent: BridgeComponent {
 
         let action = UIAction { [unowned self] _ in
             // Reply to "connect" — the web side treats this as the tap signal.
-            self.reply(to: "connect")
+            reply(to: Event.connect.rawValue)
         }
         let item = UIBarButtonItem(title: data.title, primaryAction: action)
 
@@ -35,6 +44,16 @@ final class ButtonComponent: BridgeComponent {
         }
     }
 }
+
+// MARK: Events
+
+private extension ButtonComponent {
+    enum Event: String {
+        case connect
+    }
+}
+
+// MARK: Message data
 
 private extension ButtonComponent {
     struct MessageData: Decodable {

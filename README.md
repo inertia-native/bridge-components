@@ -53,6 +53,27 @@ The components are thin; the plumbing they stand on stays an external dependency
 
 This repo itself publishes nothing to npm. It is a registry + docs site.
 
+### Native SDK compatibility
+
+The Swift components target **`hotwire-native-ios` 1.2.0 or newer**.
+
+1.2.0 ([2025-04-23](https://github.com/hotwired/hotwire-native-ios/releases/tag/1.2.0))
+made `BridgeComponent.delegate` a weak optional. The components reach the hosting
+view controller through `delegate?.destination`, which does not compile against
+1.1.x — and the 1.1.x spelling `delegate.destination` does not compile against
+1.2.0+. There is no source form that satisfies both, so this is a hard floor
+rather than a recommendation.
+
+Separately, `name` is overridden as `override nonisolated class var name`. The
+base declaration is `nonisolated`, so an app built with
+`SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor` (the Xcode 26 default for new
+projects) rejects a plain `override class var name` as an actor-isolation
+mismatch. The `nonisolated` spelling is correct under either setting.
+
+The Kotlin components carry no verified floor yet — nobody has built them against
+a pinned Android SDK version. Treat the `.kt` files as unversioned until that
+happens.
+
 ## Components
 
 - **Button** — a native navigation-bar button. ([contract](registry/button/contract.md))

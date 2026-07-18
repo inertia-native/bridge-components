@@ -22,9 +22,12 @@ const { supported, send } = useBridgeComponent('button')
 // the title/side change. Native replies to "connect" on every tap.
 watch(
   () => [supported.value, props.title, props.side] as const,
-  () => {
+  (_value, _old, onCleanup) => {
     if (!supported.value) return
-    send('connect', { title: props.title, side: props.side }, () => emit('tap'))
+    const id = send('connect', { title: props.title, side: props.side }, () => emit('tap'))
+    // Drop the old callback before re-registering, so a title/side change does
+    // not leave a second one behind and report every tap twice.
+    onCleanup(() => window.HotwireNative?.web?.removeCallback(id))
   },
   { immediate: true }
 )
