@@ -31,6 +31,10 @@ runs its tap handler (Inertia: `onTap` / `@tap`; Stimulus: `element.click()`).
 ## Compatibility rules
 
 - `title` is the only required field; native must tolerate a missing `side`.
+- `side` is a hint, not a guarantee. Android toolbar menu items always sit at the
+  end of the bar, so the Kotlin component ignores it and a `"left"` button still
+  appears on the right. Do not build layout logic on the web side that assumes
+  the button landed where you asked.
 - New fields must be optional with a native-side default, so a copied web
   component built against an older contract keeps working against a newer native
   package. Never repurpose or remove an existing field.

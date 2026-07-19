@@ -70,9 +70,14 @@ base declaration is `nonisolated`, so an app built with
 projects) rejects a plain `override class var name` as an actor-isolation
 mismatch. The `nonisolated` spelling is correct under either setting.
 
-The Kotlin components carry no verified floor yet — nobody has built them against
-a pinned Android SDK version. Treat the `.kt` files as unversioned until that
-happens.
+The Kotlin components are built against **`dev.hotwire:core` / `navigation-fragments`
+1.2.8**. That is the version they have been compiled against, not a floor that has
+been probed — older releases may well work.
+
+They reach the toolbar through `fragment.view?.findViewById(R.id.toolbar)`, so
+the host app's destination layout has to provide a toolbar with that id. This is
+what Hotwire Native's own fragments give you; a custom destination layout may
+not.
 
 ## Components
 
