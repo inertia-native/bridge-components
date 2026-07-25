@@ -81,7 +81,13 @@ not.
 
 ## Components
 
+- **Alert** — a native confirmation dialog. ([contract](registry/alert/contract.md))
 - **Button** — a native navigation-bar button. ([contract](registry/button/contract.md))
+
+A component that draws native UI on mount ships an Inertia *component*
+(`react.tsx`, `vue.vue`, `svelte.svelte`). One that draws nothing until it is
+called — `alert` — has no markup to own, so its Inertia flavor is a hook /
+composable instead (`react.tsx`, `vue.ts`, `svelte.js`).
 
 ## License
 
