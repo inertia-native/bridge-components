@@ -10,6 +10,7 @@ import { BridgeComponent, BridgeElement } from '@hotwired/hotwire-native-bridge'
 //      data-bridge-destructive="true"
 //      data-bridge-confirm="Delete">Delete</a>
 //
+// Adapted from joemasilotti/bridge-components (MIT), as is the Swift half.
 export default class extends BridgeComponent {
   static component = 'alert'
 
