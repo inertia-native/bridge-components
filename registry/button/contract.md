@@ -12,8 +12,10 @@ title; the native side draws a `UIBarButtonItem` (iOS) / toolbar menu item
 
 ### `connect` — web → native
 
-Registers (or re-registers) the bar button. Sent on connect and whenever the
-title or side changes.
+Registers (or re-registers) the bar button. Sent on connect, whenever the
+title or side changes, and again on `native:restore` (Android, back from a
+native screen), so native must replace an existing button rather than add a
+second one.
 
 ```jsonc
 {
