@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { watch } from 'vue'
-import { useBridgeComponent } from 'inertia-hotwire-native/vue'
+import { useBridgeComponent } from 'inertia-native/vue'
 
 // Renders a native navigation-bar button inside Hotwire Native. In a regular
 // browser (no native adapter) it renders the default slot as a normal control.
@@ -16,12 +16,14 @@ const props = withDefaults(
 
 const emit = defineEmits<{ tap: [] }>()
 
-const { supported, send } = useBridgeComponent('button')
+const { supported, send, restored } = useBridgeComponent('button')
 
 // Register on support (arrives after the async handshake) and re-register when
-// the title/side change. Native replies to "connect" on every tap.
+// the title/side change, or when the web view comes back from a native screen
+// (`restored`, Android), since native may have dropped the button. Native
+// replies to "connect" on every tap.
 watch(
-  () => [supported.value, props.title, props.side] as const,
+  () => [supported.value, props.title, props.side, restored.value] as const,
   (_value, _old, onCleanup) => {
     if (!supported.value) return
     const id = send('connect', { title: props.title, side: props.side }, () => emit('tap'))

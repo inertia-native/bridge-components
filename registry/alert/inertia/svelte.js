@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { useBridgeComponent } from 'inertia-hotwire-native/svelte'
+import { useBridgeComponent } from 'inertia-native/svelte'
 
 /**
  * Presents a native confirmation dialog inside Hotwire Native, and falls back to

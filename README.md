@@ -16,7 +16,7 @@ distribution channel.
 ```
 registry/<component>/
 ├── contract.md                 # source of truth: the message protocol
-├── inertia/                     # web — for inertia-hotwire-native apps
+├── inertia/                     # web — for inertia-native apps
 │   ├── react.tsx
 │   ├── vue.vue
 │   └── svelte.svelte
@@ -45,7 +45,7 @@ per-component `contract.md` is what keeps all sides compatible; keep contracts
 
 The components are thin; the plumbing they stand on stays an external dependency:
 
-- **Inertia flavors** → [`inertia-hotwire-native`](https://github.com/zumkorn/inertia-hotwire-native)
+- **Inertia flavors** → [`inertia-native`](https://github.com/inertia-native/inertia-native)
   (`useBridgeComponent`).
 - **Stimulus flavor** → [`@hotwired/hotwire-native-bridge`](https://github.com/hotwired/hotwire-native-bridge)
   (`BridgeComponent`).
