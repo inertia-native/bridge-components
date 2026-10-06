@@ -1,4 +1,4 @@
-import { useBridgeComponent } from 'inertia-hotwire-native/vue'
+import { useBridgeComponent } from 'inertia-native/vue'
 
 export interface BridgeAlertOptions {
   /** Headline of the alert. */
