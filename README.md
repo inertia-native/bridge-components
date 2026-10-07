@@ -83,6 +83,7 @@ not.
 
 - **Alert** — a native confirmation dialog. ([contract](registry/alert/contract.md))
 - **Button** — a native navigation-bar button. ([contract](registry/button/contract.md))
+- **Haptic** — native haptic feedback. ([contract](registry/haptic/contract.md))
 
 A component that draws native UI on mount ships an Inertia *component*
 (`react.tsx`, `vue.vue`, `svelte.svelte`). One that draws nothing until it is
